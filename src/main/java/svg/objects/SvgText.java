@@ -21,6 +21,7 @@ public class SvgText extends SvgObject{
     private HexColor hexColor;
     private double opacity;
     private boolean relative;
+    private boolean centered;
     private final List<String> animations = new ArrayList<>();
 
     public void addFade(double startOpacity, double endOpacity, double durationSeconds) {
@@ -38,13 +39,15 @@ public class SvgText extends SvgObject{
     @Override
     public String toString() {
         String relString = relative ? "%" : "";
+        String anchorString = centered ? "middle" : "start";
 
         StringBuilder svg = new StringBuilder(
                 String.format("  <text x=\"%s\" y=\"%s\" style=\"font-size:%spx;font-weight:bold;text-align:center;" +
-                        "text-anchor:start;font-family:sans-serif;\" opacity=\"%s\">%s",
+                        "text-anchor:%s;font-family:sans-serif;\" opacity=\"%s\">%s",
                         xPos + relString,
                         yPos + relString,
                         size,
+                        anchorString,
                         opacity,
                         text
         ));

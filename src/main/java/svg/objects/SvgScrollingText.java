@@ -16,10 +16,12 @@ public class SvgScrollingText extends SvgObject{
     private double duration;
 
     /*
-        Create multiple text elements that count from startCount to endCount in duration seconds
+        Create multiple text elements that increment from startCount to endCount in duration seconds
      */
     @Override
     public String toString() {
+        assert startCount < endCount;
+
         StringBuilder stringBuilder = new StringBuilder();
         double increment = duration / (endCount - startCount);
 
@@ -49,6 +51,7 @@ public class SvgScrollingText extends SvgObject{
                 .build();
 
         finalText.setAppearance(duration);
+        stringBuilder.append(finalText);
         return stringBuilder.toString();
     }
 }
