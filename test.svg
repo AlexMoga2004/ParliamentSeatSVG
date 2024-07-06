@@ -7,4 +7,4 @@ width="200" height="HEIGHT">
   <circle cx="30.0" cy="30.0" r="5.0" fill="#00FF00" stroke-width="1.000000" />
   <path fill="#0000FF" d="M 50.0,50.0 L 55.0,50.0 A 5.0,5.0 0 0,0 50.0,45.0 Z"/>
   <line x1="0.0%" y1="0.0%" x2="100.0%" y2="100.0%" stroke="#FF00FF" stroke-width="1.0"/>
-<text x="45.0" y="65.0" style="font-size:5.0px;font-weight:bold;text-align:center;text-anchor:start;font-family:sans-serif;" opacity="1.0">Sigma Sigma on the wall, who's the skibidiest of them all?</text></svg>
+<text x="45.0" y="65.0" style="font-size:5.0px;font-weight:bold;text-align:center;text-anchor:start;font-family:sans-serif;" opacity="1.0">Text</text></svg>
