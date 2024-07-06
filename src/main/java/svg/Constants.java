@@ -64,6 +64,13 @@ width="WIDTH" height="HEIGHT">
                 .replaceAll("BEG2", String.valueOf(endTime));
     }
 
+    public static String createAppearance(double time) {
+        String animation = "    <animate attributeName=\"opacity\" from=\"0\" to=\"1\" begin=\"BEG1s\" dur=\"0.01s\" fill=\"freeze\"\n/>";
+
+        return animation
+                .replaceAll("BEG1", String.valueOf(time));
+    }
+
 
     /* Regex pattern matcher to check validity of hex colors */
     static final Pattern hexColorRegex = Pattern.compile("#[0-9a-fA-F]{6}");

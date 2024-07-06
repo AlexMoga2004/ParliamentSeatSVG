@@ -31,6 +31,10 @@ public class SvgText extends SvgObject{
         animations.add(Constants.createInstantTransition(startTime, endTime));
     }
 
+    public void setAppearance(double time) {
+        animations.add(Constants.createAppearance(time));
+    }
+
     @Override
     public String toString() {
         String relString = relative ? "%" : "";

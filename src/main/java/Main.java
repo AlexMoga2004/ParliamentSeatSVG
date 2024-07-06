@@ -71,5 +71,7 @@ public class Main {
         System.out.println(parties.get(0).getColor());
         System.out.println(parties.get(0).getName());
         System.out.println(parties.get(0).getNumSeats());
+
+
     }
 }

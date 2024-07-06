@@ -1,6 +1,7 @@
 import lombok.Builder;
 import svg.HexColor;
 import svg.Party;
+import svg.SVGBuilder;
 
 import java.util.List;
 
@@ -19,5 +20,17 @@ public class GenerateSeatGraph {
     private final double THETA_MAX = 360 + 45;
     private final double INNER_RADIUS = 12;
     private final double OUTER_RADIUS = 48;
+
+    public void generateSVG(String partiesFilepath, String outputFilepath) {
+        List<Party> parties = Party.getPartiesFromJSON(partiesFilepath);
+        assert parties != null && !parties.isEmpty();
+
+        SVGBuilder svgBuilder = new SVGBuilder(imageWidth, imageHeight);
+        svgBuilder.setBackgroundColor(backgroundColor);
+
+        int totalSeats = parties.stream().mapToInt(Party::getNumSeats).sum();
+
+
+    }
 
 }
