@@ -2,6 +2,7 @@ import lombok.Builder;
 import svg.HexColor;
 import svg.Party;
 import svg.SVGBuilder;
+import svg.objects.SvgLine;
 import svg.objects.SvgObject;
 import svg.objects.SvgScrollingText;
 import svg.objects.SvgText;
@@ -18,12 +19,21 @@ public class GraphBuilder {
     private String title;
     private int rows;
     private int cols;
-    private double animationTime;
 
-    private final double THETA_MIN = 135;
-    private final double THETA_MAX = 360 + 45;
-    private final double INNER_RADIUS = 12;
-    private final double OUTER_RADIUS = 48;
+    @Builder.Default
+    private double animationTime = 3;
+
+    @Builder.Default
+    private double thetaMin = 135;
+
+    @Builder.Default
+    private double thetaMax = 360 + 45;
+
+    @Builder.Default
+    private double innerRadius = 12;
+
+    @Builder.Default
+    private double outerRadius = 48;
 
     public void generateSVG(String partiesFilepath, String outputFilepath) {
         List<Party> parties = Party.getPartiesFromJSON(partiesFilepath);
@@ -46,7 +56,16 @@ public class GraphBuilder {
         svgBuilder.add(generateTotalCount(centerX, countHeight, totalSeats));
 
 
+        // Create inner hole
+        //TODO
+
         /* Draw Legend */
+
+        // Create dividing line
+        double marginX = centerX + (outerRadius) * ((double) imageHeight / imageWidth);
+        double marginGap = 10;
+        svgBuilder.add(generateMargin(marginX, marginGap));
+
 
         svgBuilder.writeToFile(outputFilepath);
     }
@@ -62,7 +81,6 @@ public class GraphBuilder {
                 .centered(true)
                 .size(titleSize)
                 .relative(true)
-                .opacity(1)
                 .build();
     }
 
@@ -79,6 +97,19 @@ public class GraphBuilder {
                 .endCount(partyCount)
                 .hexColor(foregroundColor)
                 .duration(animationTime)
+                .build();
+    }
+
+    private SvgObject generateMargin(double xPos, double gap) {
+        double lineThickness = 0.5;
+
+        return SvgLine.builder()
+                .x1(xPos)
+                .x2(xPos)
+                .y1(gap)
+                .y2(100 - gap)
+                .relative(true)
+                .width(lineThickness)
                 .build();
     }
 

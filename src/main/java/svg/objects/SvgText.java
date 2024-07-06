@@ -18,10 +18,15 @@ public class SvgText extends SvgObject{
     private double yPos;
     private double size;
     private String text;
-    private HexColor hexColor;
-    private double opacity;
     private boolean relative;
     private boolean centered;
+
+    @Builder.Default
+    private HexColor hexColor = new HexColor("#000000");
+
+    @Builder.Default
+    private double opacity = 1;
+
     private final List<String> animations = new ArrayList<>();
 
     public void addFade(double startOpacity, double endOpacity, double durationSeconds) {

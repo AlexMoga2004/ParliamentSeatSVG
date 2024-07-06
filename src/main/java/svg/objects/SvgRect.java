@@ -15,8 +15,10 @@ public class SvgRect extends SvgObject {
     private double height;
     private HexColor hexColor;
     private boolean relative;
-    private double thickness;
     private boolean fill;
+
+    @Builder.Default
+    private double thickness = 1;
 
     @Override
     public String toString() {

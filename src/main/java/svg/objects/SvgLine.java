@@ -13,9 +13,12 @@ public class SvgLine extends SvgObject{
     private double y1;
     private double x2;
     private double y2;
-    private double width;
-    private HexColor hexColor;
     private boolean relative;
+
+    @Builder.Default
+    private HexColor hexColor = new HexColor("#000000");
+    @Builder.Default
+    private double width = 1;
 
     @Override
     public String toString() {
@@ -28,7 +31,7 @@ public class SvgLine extends SvgObject{
                 x2 + relString,
                 y2 + relString,
                 hexColor,
-                width
+                width + relString
         );
     }
 }
