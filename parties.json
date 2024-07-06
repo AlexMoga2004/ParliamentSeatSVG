@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Party A",
+    "numSeats": 30,
+    "color": "#FF0000"
+  },
+  {
+    "name": "Party B",
+    "numSeats": 25,
+    "color": "#00FF00"
+  }
+]

@@ -1,6 +1,9 @@
 import svg.HexColor;
+import svg.Party;
 import svg.SVGBuilder;
 import svg.objects.*;
+
+import java.util.List;
 
 public class Main {
 
@@ -61,5 +64,12 @@ public class Main {
 
         svgBuilder.add(text);
         svgBuilder.writeToFile("test.svg");
+
+        List<Party> parties = Party.getPartiesFromJSON("parties.json");
+        assert parties != null;
+        System.out.println(parties.size());
+        System.out.println(parties.get(0).getColor());
+        System.out.println(parties.get(0).getName());
+        System.out.println(parties.get(0).getNumSeats());
     }
 }
