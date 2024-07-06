@@ -8,12 +8,18 @@ public class SvgScrollingText extends SvgObject{
     private double xPos;
     private double yPos;
     private double size;
-    private String text;
     private HexColor hexColor;
+    private boolean centered;
     private boolean relative;
     private int startCount;
     private int endCount;
     private double duration;
+
+    @Builder.Default
+    private String prepend = "";
+
+    @Builder.Default
+    private String append = "";
 
     /*
         Create multiple text elements that increment from startCount to endCount in duration seconds
@@ -30,7 +36,8 @@ public class SvgScrollingText extends SvgObject{
                     .xPos(xPos)
                     .yPos(yPos)
                     .size(size)
-                    .text(String.valueOf(i))
+                    .centered(centered)
+                    .text(prepend + i + append)
                     .hexColor(hexColor)
                     .opacity(0)
                     .relative(relative)
@@ -44,7 +51,8 @@ public class SvgScrollingText extends SvgObject{
                 .xPos(xPos)
                 .yPos(yPos)
                 .size(size)
-                .text(String.valueOf(endCount))
+                .centered(centered)
+                .text(prepend + endCount + append)
                 .hexColor(hexColor)
                 .opacity(0)
                 .relative(relative)

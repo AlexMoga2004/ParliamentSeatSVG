@@ -2,10 +2,7 @@ import lombok.Builder;
 import svg.HexColor;
 import svg.Party;
 import svg.SVGBuilder;
-import svg.objects.SvgLine;
-import svg.objects.SvgObject;
-import svg.objects.SvgScrollingText;
-import svg.objects.SvgText;
+import svg.objects.*;
 
 import java.util.List;
 
@@ -53,11 +50,11 @@ public class GraphBuilder {
 
         // Add title and total seat count
         svgBuilder.add(generateTitle(centerX, titleHeight));
-        svgBuilder.add(generateTotalCount(centerX, countHeight, totalSeats));
+        svgBuilder.add(generateTotalCount(centerX-4, countHeight, totalSeats));
 
 
         // Create inner hole
-        //TODO
+        svgBuilder.add(generateInnerHole(centerX, centerY));
 
         /* Draw Legend */
 
@@ -65,6 +62,8 @@ public class GraphBuilder {
         double marginX = centerX + (outerRadius) * ((double) imageHeight / imageWidth);
         double marginGap = 10;
         svgBuilder.add(generateMargin(marginX, marginGap));
+
+
 
 
         svgBuilder.writeToFile(outputFilepath);
@@ -94,9 +93,21 @@ public class GraphBuilder {
                 .relative(true)
                 .hexColor(foregroundColor)
                 .startCount(0)
+                .append(" seats")
                 .endCount(partyCount)
                 .hexColor(foregroundColor)
                 .duration(animationTime)
+                .build();
+    }
+
+    private SvgObject generateInnerHole(double centerX, double centerY) {
+        return SvgCircle.builder()
+                .xPos(centerX)
+                .yPos(centerY)
+                .radius(innerRadius / 2)
+                .hexColor(foregroundColor)
+                .fill(true)
+                .relative(true)
                 .build();
     }
 
