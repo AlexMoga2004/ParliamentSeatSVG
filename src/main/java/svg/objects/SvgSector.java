@@ -3,7 +3,11 @@ package svg.objects;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import svg.Constants;
 import svg.HexColor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +21,20 @@ public class SvgSector extends SvgObject{
     private HexColor hexColor;
     private boolean relative;
     private boolean fill;
+    private List<String> animations;
+
+    public void addIDFade(String ID, double startOpacity, double endOpacity, double duration) {
+        if (animations == null) animations = new ArrayList<>();
+
+        animations.add(Constants.createIDFade(ID, startOpacity, endOpacity, duration));
+    }
+
+    public void addIDFade(String ID, String beginID,
+                          double startOpacity, double endOpacity, double duration) {
+        if (animations == null) animations = new ArrayList<>();
+
+        animations.add(Constants.createIDFade(ID, beginID, startOpacity, endOpacity, duration));
+    }
 
     @Override
     public String toString() {

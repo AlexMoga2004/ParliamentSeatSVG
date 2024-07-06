@@ -37,7 +37,7 @@ public class SVGBuilder {
         svgObjects.add(0, backgroundRect);
     }
 
-    public void appendObject(SvgObject svgObject) {
+    public void add(SvgObject svgObject) {
         svgObjects.add(svgObject);
     }
 
@@ -48,9 +48,7 @@ public class SVGBuilder {
     @Override
     public String toString() {
         StringBuilder rawSVG = new StringBuilder();
-        rawSVG.append(Constants.initialSvg
-                .replaceAll("WIDTH", String.valueOf(IMAGE_WIDTH))
-                .replaceAll("WIDTH", String.valueOf(IMAGE_HEIGHT)));
+        rawSVG.append(Constants.createInitialSVG(IMAGE_WIDTH, IMAGE_HEIGHT));
 
         svgObjects.forEach(rawSVG::append);
 

@@ -10,7 +10,7 @@ public class Main {
         SVGBuilder svgBuilder = new SVGBuilder(200, 200);
         svgBuilder.setBackgroundColor(new HexColor("#AAAAAA"));
 
-        svgBuilder.appendObject(SvgRect.builder()
+        svgBuilder.add(SvgRect.builder()
                 .xPos(10)
                 .yPos(10)
                 .width(10)
@@ -20,7 +20,7 @@ public class Main {
                 .build()
         );
 
-        svgBuilder.appendObject(SvgCircle.builder()
+        svgBuilder.add(SvgCircle.builder()
                 .xPos(30)
                 .yPos(30)
                 .radius(5)
@@ -29,7 +29,7 @@ public class Main {
                 .build()
         );
 
-        svgBuilder.appendObject(SvgSector.builder()
+        svgBuilder.add(SvgSector.builder()
                 .xPos(50)
                 .yPos(50)
                 .radius(5)
@@ -39,7 +39,7 @@ public class Main {
                 .build()
         );
 
-        svgBuilder.appendObject(SvgLine.builder()
+        svgBuilder.add(SvgLine.builder()
                 .x1(0)
                 .y1(0)
                 .x2(100)
@@ -50,14 +50,16 @@ public class Main {
                 .build()
         );
 
-        svgBuilder.appendObject(SvgText.builder()
+        SvgText text = SvgText.builder()
                 .xPos(45)
-                .yPos(65)
+                .yPos(45)
                 .size(5)
                 .text("Text")
-                .build()
-        );
+                .build();
 
+        text.setDuration(5, 10);
+
+        svgBuilder.add(text);
         svgBuilder.writeToFile("test.svg");
     }
 }
