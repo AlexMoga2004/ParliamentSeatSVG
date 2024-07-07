@@ -19,7 +19,6 @@ public class SvgSector extends SvgObject{
     private double startAngleDeg;
     private double endAngleDeg;
     private HexColor hexColor;
-    private boolean relative;
     private double thickness;
     private boolean fill;
     private List<String> animations;

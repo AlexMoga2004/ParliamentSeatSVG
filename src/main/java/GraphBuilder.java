@@ -64,8 +64,8 @@ public class GraphBuilder {
         svgBuilder.add(generateTitle(centerX, titleHeight));
         svgBuilder.add(generateTotalCount(centerX-4, countHeight, totalSeats));
 
-        //TODO: Draw parties (CBA today)
-//        generatePartySectors(parties, centerX, centerY).foreach(svgBuilder::add);
+        // Draw the party sectors
+        generatePartySectors(parties, centerX, centerY).forEach(svgBuilder::add);
 
         // Create inner hole
         svgBuilder.add(generateInnerHole(centerX, centerY));
@@ -73,7 +73,7 @@ public class GraphBuilder {
         /* Draw Legend */
 
         // Create dividing line
-        double marginX = centerX + (outerRadius) * ((double) imageHeight / imageWidth);
+        double marginX = centerX + (outerRadius) * ((double) imageHeight / imageWidth) + 5;
         double marginGap = 10;
         svgBuilder.add(generateMargin(marginX, marginGap));
 
@@ -131,6 +131,58 @@ public class GraphBuilder {
                 .build();
     }
 
+    /*
+        Calculate how many visible slots each party gets based on the proportion of seats
+        Note: Number of slots = rows * cols
+     */
+    private int[] allocateSlots(List<Party> parties) {
+        int totalSeats = parties.stream().mapToInt(Party::getNumSeats).sum();
+
+        return parties.stream()
+                .mapToInt(party -> (int) (0.5 + (double) party.getNumSeats() *
+                        (rows * cols) / totalSeats))
+                .toArray();
+    }
+
+    private List<SvgObject> generatePartySectors(List<Party> parties, double centerX, double centerY) {
+        List<SvgObject> partySectors = new ArrayList<>();
+        int[] slotsPerParty = allocateSlots(parties);
+        int currentPartyIndex = 0;
+        int currentRow = 0;
+        int currentCol = 0;
+
+        for (int i = 0; i < rows * cols; ++i) {
+            if (slotsPerParty[currentPartyIndex] == 0) ++currentPartyIndex;
+
+            double radius = innerRadius + ((outerRadius - innerRadius) * ((double) (rows - currentRow) / rows));
+            double startAngle = thetaMin + (thetaMax - thetaMin) * ((double) currentCol / cols);
+            double endAngle = thetaMin + (thetaMax - thetaMin) * ((double) (currentCol + 1) / cols);
+
+            SvgSector sector = SvgSector.builder()
+                    .xPos(centerX * imageWidth / 100d) // Sectors do not support relative, so adjust manually
+                    .yPos(centerY * imageHeight / 100d)
+                    .radius(radius * imageHeight / 100d)
+                    .startAngleDeg(startAngle)
+                    .endAngleDeg(endAngle)
+                    .hexColor(parties.get(currentPartyIndex).getHexColor())
+                    .fill(true)
+                    .build();
+
+            partySectors.add(sector);
+
+            ++currentRow;
+            --slotsPerParty[currentPartyIndex];
+
+            // Wrap around to next column if entire column filled out
+            if(currentRow == rows) {
+                currentRow = 0;
+                ++currentCol;
+            }
+        }
+
+        return partySectors;
+    }
+
 //    private List<SvgObject> generatePartySectors(List<Party> parties, double centerX, double centerY) {
 //        double seatGap = 0.5;
 //        List<SvgObject> partySectors = new ArrayList<>();
@@ -161,7 +213,7 @@ public class GraphBuilder {
                 .xPos(centerX)
                 .yPos(centerY)
                 .radius(innerRadius / 2)
-                .hexColor(foregroundColor)
+                .hexColor(backgroundColor)
                 .fill(true)
                 .relative(true)
                 .build();
