@@ -218,9 +218,9 @@ public class GraphBuilder {
 
     private SvgObject generateInnerHole(double centerX, double centerY) {
         return SvgCircle.builder()
-                .xPos(centerX * imageWidth / 100)
-                .yPos(centerY * imageHeight / 100)
-                .radius(innerRadius / 2 * (imageHeight / 100))
+                .xPos(centerX)
+                .yPos(centerY)
+                .radius(innerRadius / 2)
                 .hexColor(backgroundColor)
                 .fill(true)
                 .relative(true)
