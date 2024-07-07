@@ -70,6 +70,12 @@ public class GraphBuilder {
         // Create inner hole
         svgBuilder.add(generateInnerHole(centerX, centerY));
 
+        // Split the sectors
+        generatePartyGaps(centerX, centerY).forEach(svgBuilder::add);
+
+        // Cover the sectors, and animate reveal using sweeping sector
+        svgBuilder.add(generateSweepingSector(centerX, centerY));
+
         /* Draw Legend */
 
         // Create dividing line
@@ -77,7 +83,7 @@ public class GraphBuilder {
         double marginGap = 10;
         svgBuilder.add(generateMargin(marginX, marginGap));
 
-        // Create the party colors and names (TODO: and counts)
+        // Create the party colors and names
         generatePartyLegends(parties, marginX).forEach(svgBuilder::add);
 
         svgBuilder.writeToFile(outputFilepath);
@@ -183,39 +189,57 @@ public class GraphBuilder {
         return partySectors;
     }
 
-//    private List<SvgObject> generatePartySectors(List<Party> parties, double centerX, double centerY) {
-//        double seatGap = 0.5;
-//        List<SvgObject> partySectors = new ArrayList<>();
-//
-//        for (int col = 0; col < cols; ++col) {
-//            for (int row = 0; row < rows; ++row) {
-//                double radius = innerRadius + ((outerRadius - innerRadius) * ((double) (rows - row) / rows));
-//                double startAngle = thetaMin + (thetaMax - thetaMin) * ((double) col / cols);
-//                double endAngle = thetaMin + (thetaMax - thetaMin) * ((double) (col + 1)/ cols);
-//
-//                SvgSector sector = SvgSector.builder()
-//                        .xPos(centerX)
-//                        .yPos(centerY)
-//                        .radius(radius)
-//                        .startAngleDeg(startAngle)
-//                        .endAngleDeg(endAngle)
-//                        .hexColor(p)
-//                        .thickness()
-//                        .relative(true)
-//            }
-//        }
-//
-//        return partySectors
-//    }
+    private List<SvgObject> generatePartyGaps(double centerX, double centerY) {
+        double seatGap = 0.5;
+        List<SvgObject> gaps = new ArrayList<>();
+
+        for (int col = 0; col < cols; ++col) {
+            for (int row = 0; row < rows; ++row){
+                double radius = innerRadius + ((outerRadius - innerRadius) * ((double) (rows - row) / rows));
+                double startAngle = thetaMin + (thetaMax - thetaMin) * ((double) col / cols);
+                double endAngle = thetaMin + (thetaMax - thetaMin) * ((double) (col + 1) / cols);
+
+                SvgSector gap = SvgSector.builder()
+                        .xPos(centerX * imageWidth / 100)
+                        .yPos(centerY * imageHeight / 100)
+                        .radius(radius * imageHeight / 100)
+                        .startAngleDeg(startAngle)
+                        .endAngleDeg(endAngle)
+                        .hexColor(backgroundColor)
+                        .thickness(seatGap)
+                        .thicknessRelative(true)
+                        .build();
+
+                gaps.add(gap);
+            }
+        }
+        return gaps;
+    }
 
     private SvgObject generateInnerHole(double centerX, double centerY) {
         return SvgCircle.builder()
-                .xPos(centerX)
-                .yPos(centerY)
-                .radius(innerRadius / 2)
+                .xPos(centerX * imageWidth / 100)
+                .yPos(centerY * imageHeight / 100)
+                .radius(innerRadius / 2 * (imageHeight / 100))
                 .hexColor(backgroundColor)
                 .fill(true)
                 .relative(true)
+                .build();
+    }
+
+    private SvgObject generateSweepingSector(double centerX, double centerY) {
+        int resolution = 260;
+
+        return SvgSweepingSector.builder()
+                .xPos(centerX * imageWidth / 100)
+                .yPos(centerY * imageHeight / 100)
+                .radius(outerRadius * imageHeight / 100)
+                .hexColor(backgroundColor)
+                .startAngleDeg(thetaMax)
+                .endAngleDeg(thetaMin)
+                .duration(animationTime)
+                .id("inner")
+                .resolution(resolution)
                 .build();
     }
 

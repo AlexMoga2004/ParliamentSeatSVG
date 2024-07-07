@@ -22,7 +22,7 @@ width="WIDTH" height="HEIGHT">
 
     public static String createIDFade(String ID, String beginID,
                                       double startOpacity, double endOpacity, double duration) {
-        String ID_fade = "<animate id=\"ID\" begin=\"BEGIN\" attributeName=\"opacity\" from=\"FROM\" to=\"TO\" dur=\"DURs\" fill=\"freeze\" />";
+        String ID_fade = "    <animate id=\"ID\" begin=\"BEGIN.end\" attributeName=\"opacity\" from=\"FROM\" to=\"TO\" dur=\"DURs\" fill=\"freeze\" />\n";
 
         return ID_fade
                 .replaceAll("ID", ID)
@@ -33,7 +33,7 @@ width="WIDTH" height="HEIGHT">
     }
 
     public static String createIDFade(String ID, double startOpacity, double endOpacity, double duration) {
-        String ID_fade = "<animate id=\"ID\" attributeName=\"opacity\" from=\"FROM\" to=\"TO\" dur=\"DURs\" fill=\"freeze\" />";
+        String ID_fade = "    <animate id=\"ID\" attributeName=\"opacity\" from=\"FROM\" to=\"TO\" dur=\"DURs\" fill=\"freeze\" />\n";
 
         return ID_fade
                 .replaceAll("ID", ID)
