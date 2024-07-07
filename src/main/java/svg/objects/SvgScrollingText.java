@@ -31,20 +31,22 @@ public class SvgScrollingText extends SvgObject{
         StringBuilder stringBuilder = new StringBuilder();
         double increment = duration / (endCount - startCount);
 
-        for (int i = startCount; i < endCount; ++i) {
-            SvgText text = SvgText.builder()
-                    .xPos(xPos)
-                    .yPos(yPos)
-                    .size(size)
-                    .centered(centered)
-                    .text(prepend + i + append)
-                    .hexColor(hexColor)
-                    .opacity(0)
-                    .relative(relative)
-                    .build();
+        if (duration > 0) {
+            for (int i = startCount; i < endCount; ++i) {
+                SvgText text = SvgText.builder()
+                        .xPos(xPos)
+                        .yPos(yPos)
+                        .size(size)
+                        .centered(centered)
+                        .text(prepend + i + append)
+                        .hexColor(hexColor)
+                        .opacity(0)
+                        .relative(relative)
+                        .build();
 
-            text.setDuration((i - startCount) * increment, ((i + 1) - startCount) * increment);
-            stringBuilder.append(text);
+                text.setDuration((i - startCount) * increment, ((i + 1) - startCount) * increment);
+                stringBuilder.append(text);
+            }
         }
 
         SvgText finalText = SvgText.builder()

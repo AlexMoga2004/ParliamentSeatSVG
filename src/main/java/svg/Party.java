@@ -1,10 +1,7 @@
 package svg;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,10 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Party {
     private String name;
     private int numSeats;
-    private HexColor color;
+    private HexColor hexColor;
 
     public static List<Party> getPartiesFromJSON(String filepath) {
         ObjectMapper objectMapper = new ObjectMapper();

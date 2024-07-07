@@ -1,12 +1,32 @@
 [
   {
-    "name": "Party A",
-    "numSeats": 30,
-    "color": "#FF0000"
+    "name": "SPD",
+    "numSeats": 207,
+    "hexColor": "#FF0000"
   },
   {
-    "name": "Party B",
-    "numSeats": 25,
-    "color": "#00FF00"
+    "name": "CDU",
+    "numSeats": 197,
+    "hexColor": "#FFA500"
+  },
+  {
+    "name": "Alliance 90",
+    "numSeats": 118,
+    "hexColor": "#FFFF00"
+  },
+  {
+    "name": "FDP",
+    "numSeats": 92,
+    "hexColor": "#00FF00"
+  },
+  {
+    "name": "AFD",
+    "numSeats": 78,
+    "hexColor": "#00FFFF"
+  },
+  {
+    "name": "Random Party",
+    "numSeats": 44,
+    "hexColor": "#00AAFF"
   }
 ]
