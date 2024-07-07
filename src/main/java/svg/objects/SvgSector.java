@@ -20,6 +20,7 @@ public class SvgSector extends SvgObject{
     private double endAngleDeg;
     private HexColor hexColor;
     private boolean relative;
+    private double thickness;
     private boolean fill;
     private List<String> animations;
 
@@ -50,7 +51,10 @@ public class SvgSector extends SvgObject{
         int largeArcFlag = (Math.abs(startAngleDeg - endAngleDeg) > 180) ? 1 : 0;
         int sweepFlag = (startAngleDeg > endAngleDeg) ? 1 : 0;
 
-        return "  <path fill=\"" + hexColor + "\" d=\"M " + xPos + "," + yPos + " L " + x1 + "," + y1 + " A "
-                + radius +  "," + radius  + " 0 " + largeArcFlag + "," + sweepFlag + " " + x2 + "," + y2  + " Z\"/>\n";
+        String fillOrTrace = fill ? "fill" : "stroke";
+
+        return "  <path " + fillOrTrace + "=\"" + hexColor + "\" stroke-width=\"" + thickness + "\" d=\"M " + xPos + ","
+                + yPos + " L " + x1 + "," + y1 + " A " + radius +  "," + radius  + " 0 " + largeArcFlag + ","
+                + sweepFlag + " " + x2 + "," + y2  + " Z\"/>\n";
     }
 }

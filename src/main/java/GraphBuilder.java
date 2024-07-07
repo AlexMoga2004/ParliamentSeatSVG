@@ -65,6 +65,7 @@ public class GraphBuilder {
         svgBuilder.add(generateTotalCount(centerX-4, countHeight, totalSeats));
 
         //TODO: Draw parties (CBA today)
+//        generatePartySectors(parties, centerX, centerY).foreach(svgBuilder::add);
 
         // Create inner hole
         svgBuilder.add(generateInnerHole(centerX, centerY));
@@ -129,6 +130,31 @@ public class GraphBuilder {
                 .duration(animationTime)
                 .build();
     }
+
+//    private List<SvgObject> generatePartySectors(List<Party> parties, double centerX, double centerY) {
+//        double seatGap = 0.5;
+//        List<SvgObject> partySectors = new ArrayList<>();
+//
+//        for (int col = 0; col < cols; ++col) {
+//            for (int row = 0; row < rows; ++row) {
+//                double radius = innerRadius + ((outerRadius - innerRadius) * ((double) (rows - row) / rows));
+//                double startAngle = thetaMin + (thetaMax - thetaMin) * ((double) col / cols);
+//                double endAngle = thetaMin + (thetaMax - thetaMin) * ((double) (col + 1)/ cols);
+//
+//                SvgSector sector = SvgSector.builder()
+//                        .xPos(centerX)
+//                        .yPos(centerY)
+//                        .radius(radius)
+//                        .startAngleDeg(startAngle)
+//                        .endAngleDeg(endAngle)
+//                        .hexColor(p)
+//                        .thickness()
+//                        .relative(true)
+//            }
+//        }
+//
+//        return partySectors
+//    }
 
     private SvgObject generateInnerHole(double centerX, double centerY) {
         return SvgCircle.builder()
