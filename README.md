@@ -4,7 +4,7 @@ Command-line SVG generation tool for the distribution of seats in political part
 Usage:
 
 <pre>
--at,--animationTime &lt;arg&gt;     Animation time in seconds (default 3, warning: drastically increases file size)
+-at,--animationTime &lt;arg&gt;     Animation time in seconds (default 3, warning: drastically increases file size, runs poorly on Safari (but great on Firefox, Chrome etc...))
 
 -bg,--backgroundColor &lt;arg&gt;   Background color in hex (default grey)
 
@@ -24,3 +24,8 @@ Usage:
 
 -t,--title &lt;arg&gt;              Title of the graph (default "")
 </pre>
+
+Design inspired by: https://github.com/AlexMoga2004/ParliamentSeatSVG/blob/main/graph.svg
+
+# Example: 
+![graph](https://github.com/user-attachments/assets/dbcd5070-f7a2-4388-a950-35525a11cde9)
