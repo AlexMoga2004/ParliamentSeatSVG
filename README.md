@@ -27,5 +27,5 @@ Usage:
 
 Design inspired by: https://github.com/AlexMoga2004/ParliamentSeatSVG/blob/main/graph.svg
 
-# Example: 
+# Example (refresh page to see animation): 
 ![graph](https://github.com/user-attachments/assets/dbcd5070-f7a2-4388-a950-35525a11cde9)
