@@ -25,7 +25,6 @@ Usage:
 -t,--title &lt;arg&gt;              Title of the graph (default "")
 </pre>
 
-Design inspired by: https://github.com/AlexMoga2004/ParliamentSeatSVG/blob/main/graph.svg
-
+Design inspired by: https://www.bundestag.de/en/parliament/plenary/distributionofseats
 # Example (refresh page to see animation): 
 ![graph](https://github.com/user-attachments/assets/dbcd5070-f7a2-4388-a950-35525a11cde9)
